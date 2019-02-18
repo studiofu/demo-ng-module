@@ -1,27 +1,69 @@
-# DemoNgModules
+# demo-ng-modules
+demo of using angular modules
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
+# install package
+npm install bootstrap --save
 
-## Development server
+# create student module
+ng g module student
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# create components under student module
+ng g c student/student --spec=false
+ng g c student/student-list --spec=false
+ng g c student/student-list-item --spec=false
 
-## Code scaffolding
+# declartion in studen module
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+declarations should be used to declare what components in the module
 
-## Build
+```
+@NgModule({
+  declarations: [StudentComponent, StudentListComponent, StudentListItemComponent],
+  imports: [
+    CommonModule
+  ]
+})
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+import the student module to the app module
+```
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    StudentModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 
-## Running unit tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# create service and model
 
-## Running end-to-end tests
+ng g s student/student --spec=false
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+create student.model.ts
 
-## Further help
+```
+export class Student {
+  id: Number;
+  name: String;
+  enrollno: Number;
+  college: String;
+  university: String;
+}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+
+modify the student service which will be used to provide some students data in observable format
+
+observable tutorial: 
+- https://appdividend.com/2018/12/08/angular-7-observables-tutorial-with-example/
+- https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+
+
+
